@@ -1364,7 +1364,7 @@ function loop(){
       }
       if(!player.alive||!overlaps(player,o))continue;
       if(o.type==='spike'||o.type==='dspike'){
-        if(!flyMode) kill(); // spikes always kill (both modes)
+        kill(); // spikes always kill — no immunity
       } else {
         // Block: land on top, die from side
         const prevBot=player.prevY+player.h;
