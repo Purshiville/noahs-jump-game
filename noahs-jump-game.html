@@ -67,6 +67,7 @@ const CHARS = [
   { emoji:null,  name:'Blue',    glow:'#0066ff' },
   { emoji:null,  name:'Gold',    glow:'#ffcc00' },
   { emoji:null,  name:'RedFace', glow:'#ff2200' },
+  { emoji:null,  name:'YelloFace', glow:'#ffe033' },
   { emoji:'🍉',  name:'CoCo',   glow:'#ff4488' },
   { emoji:'👧',  name:'Girl',    glow:'#ff88cc' },
   { emoji:'🛸',  name:'UFO',    glow:'#44ffcc', isRocketType:true },
@@ -750,7 +751,7 @@ function drawTrail(){
     ctx.save();ctx.translate(t.x,t.y);
     const ch=CHARS[t.char];
     if(!ch){}
-    else if(ch.name==='Cube'||ch.name==='Noah'||ch.name==='Blue'||ch.name==='Gold'||ch.name==='RedFace'){
+    else if(ch.name==='Cube'||ch.name==='Noah'||ch.name==='Blue'||ch.name==='Gold'||ch.name==='RedFace'||ch.name==='YelloFace'){
       ctx.rotate(t.angle);const s=t.sz*.43;
       ctx.strokeStyle=t.col;ctx.lineWidth=1.5;ctx.strokeRect(-s,-s,s*2,s*2);
     } else if(ch.emoji){
@@ -920,6 +921,22 @@ function drawPlayer(p){
     ctx.strokeStyle='#ffdd00';ctx.lineWidth=2;
     ctx.beginPath();ctx.arc(0,s*.1,s*.3,.15*Math.PI,.85*Math.PI);ctx.stroke();
     ngl();
+  } else if(ch.name==='YelloFace'){
+    ctx.rotate(p.angle);
+    const s=p.w*.46;
+    gl('#ffe033',18);
+    const r=s*.35;
+    ctx.fillStyle='#ffe84a';
+    ctx.beginPath();ctx.moveTo(-s+r,-s);ctx.lineTo(s-r,-s);ctx.quadraticCurveTo(s,-s,s,-s+r);
+    ctx.lineTo(s,s-r);ctx.quadraticCurveTo(s,s,s-r,s);ctx.lineTo(-s+r,s);
+    ctx.quadraticCurveTo(-s,s,-s,s-r);ctx.lineTo(-s,-s+r);ctx.quadraticCurveTo(-s,-s,-s+r,-s);
+    ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#e8c000';ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='#2277cc';
+    ctx.beginPath();ctx.ellipse(-s*.28,-s*.12,s*.22,s*.19,0,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse(s*.28,-s*.12,s*.22,s*.19,0,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse(0,s*.28,s*.33,s*.18,0,0,Math.PI*2);ctx.fill();
+    ngl();
   } else {
     ctx.font=`${p.w*1.02}px serif`;
     ctx.fillText(ch.emoji,0,2);
@@ -1069,6 +1086,19 @@ function drawCharSelect(){
       ctx.beginPath();ctx.arc(ps*.3,-ps*.13,ps*.09,0,Math.PI*2);ctx.fill();
       ctx.strokeStyle='#ffdd00';ctx.lineWidth=2;
       ctx.beginPath();ctx.arc(0,ps*.16,ps*.33,.15*Math.PI,.85*Math.PI);ctx.stroke();ngl();
+    } else if(ch.name==='YelloFace'){
+      const r=ps*.35;
+      gl('#ffe033',14);ctx.fillStyle='#ffe84a';
+      ctx.beginPath();ctx.moveTo(-ps+r,-ps);ctx.lineTo(ps-r,-ps);ctx.quadraticCurveTo(ps,-ps,ps,-ps+r);
+      ctx.lineTo(ps,ps-r);ctx.quadraticCurveTo(ps,ps,ps-r,ps);ctx.lineTo(-ps+r,ps);
+      ctx.quadraticCurveTo(-ps,ps,-ps,ps-r);ctx.lineTo(-ps,-ps+r);ctx.quadraticCurveTo(-ps,-ps,-ps+r,-ps);
+      ctx.closePath();ctx.fill();
+      ctx.strokeStyle='#e8c000';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.fillStyle='#2277cc';
+      ctx.beginPath();ctx.ellipse(-ps*.28,-ps*.12,ps*.22,ps*.19,0,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.ellipse(ps*.28,-ps*.12,ps*.22,ps*.19,0,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.ellipse(0,ps*.28,ps*.33,ps*.18,0,0,Math.PI*2);ctx.fill();
+      ngl();
     } else if(ch.emoji){
       ctx.font=`${ps*1.85}px serif`;ctx.fillText(ch.emoji,0,2);
     }
